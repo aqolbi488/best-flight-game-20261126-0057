@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kestrel Coast — Island Flight</title>
+<style>
+  html,body{margin:0;padding:0;background:#0b1d2e;color:#eaf6ff;font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;overflow:hidden}
+  #wrap{position:relative;width:100vw;height:100vh}
+  canvas{display:block;width:100%;height:100%;background:#7ec8f7}
+  #hud{position:absolute;inset:0;pointer-events:none}
+  #topbar{position:absolute;top:10px;left:12px;right:12px;display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+  .pill{background:rgba(6,24,40,.82);border:2px solid rgba(255,255,255,.9);border-radius:12px;padding:8px 12px;box-shadow:0 4px 18px rgba(0,0,0,.35)}
+  .big{font-size:30px;font-weight:900;letter-spacing:.02em;line-height:1}
+  .label{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#9fdcff}
+  #mission{max-width:460px}
+  #missionText{font-size:20px;font-weight:800;line-height:1.15;margin-top:4px}
+  #msg{position:absolute;left:50%;top:62%;transform:translate(-50%,-50%);text-align:center;background:rgba(6,24,40,.88);border:3px solid #fff;border-radius:16px;padding:16px 22px;max-width:78vw}
+  #msg h1{margin:0 0 6px;font-size:34px}
+  #msg p{margin:4px 0;font-size:17px;line-height:1.35}
+  #help{position:absolute;left:12px;bottom:12px;font-size:14px;line-height:1.4}
+  #gauges{position:absolute;right:12px;bottom:12px;display:flex;gap:10px;align-items:flex-end}
+  .gauge{width:150px}
+  .bar{height:14px;background:#123;border:2px solid #fff;border-radius:8px;overflow:hidden;margin-top:6px}
+  .bar>div{height:100%}
+  kbd{background:#fff;color:#123;border-radius:5px;padding:1px 6px;font-weight:800}
+</style>
+</head>
+<body>
+<div id="wrap">
+  <canvas id="game" width="1280" height="720"></canvas>
+  <div id="hud">
+    <div id="topbar">
+      <div class="pill" id="mission">
+        <div class="label">Kestrel Coast · Mission</div>
+        <div id="missionText">Fly through the gold rings, then land on the runway.</div>
+        <div id="scoreLine" style="margin-top:6px;font-weight:800">Score 0 · Rings 0/6</div>
+      </div>
+      <div style="display:flex;gap:10px">
+        <div class="pill"><div class="label">Altitude</div><div class="big" id="alt">120 m</div></div>
+        <div class="pill"><div class="label">Speed</div><div class="big" id="spd">42 kt</div></div>
+        <div class="pill"><div class="label">Heading</div><div class="big" id="hdg">090°</div></div>
+      </div>
+    </div>
+    <div id="msg"></div>
+    <div class="pill" id="help">
+      <b>Controls:</b> <kbd>W</kbd>/<kbd>S</kbd> throttle · <kbd>←</kbd><kbd>→</kbd> or <kbd>A</kbd><kbd>D</kbd> turn · <kbd>↑</kbd><kbd>↓</kbd> pitch · <kbd>C</kbd> camera · <kbd>R</kbd> restart<br>
+      <span id="stall" style="font-weight:900;color:#ffd166"></span>
+    </div>
+    <div id="gauges">
+      <div class="pill gauge"><div class="label">Fuel</div><div class="bar"><div id="fuelBar" style="background:#ffd166;width:100%"></div></div><div id="fuelTxt" style="font-weight:800;margin-top:4px">100%</div></div>
+      <div class="pill gauge"><div class="label">Hull</div><div class="bar"><div id="hullBar" style="background:#5ef08a;width:100%"></div></div><div id="hullTxt" style="font-weight:800;margin-top:4px">100%</div></div>
+    </div>
+  </div>
+</div>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
